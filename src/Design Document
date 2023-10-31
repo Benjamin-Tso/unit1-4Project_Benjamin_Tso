@@ -1,0 +1,42 @@
+Objects/Classes
+    Polynomial class, does all the logic
+    Runner class, handles user input
+Constructor
+    Polynomial constructor
+        Parameters : e (String)
+        instance variables
+            expression (String)(private) : contains the polynomial expression contained in parameter e
+            terms (String list)(private) : contains a list of the terms within the expression
+            coefficients (double list)(private) : contains coefficients for each term
+            exponents (int list)(private) : contains exponents for each term
+Polynomial class methods
+    parseTerms
+        accessibility: private
+        Parameters : none
+        return : String list
+        each element of the returned list is a string containing one term of the expression, found by finding the nearest + or -
+    parseCoefficients
+        accessibility: private
+        parameters : none
+        return :double list
+        each element of the returned list is a double representing each coefficient of the terms, found by finding "x" in the term, then finding what come before it, if nothing is there use 1
+    parseExponents
+        accessibility: private
+        parameters : none
+        return :int list
+        each element of the returned list is a int representing each exponent of the terms, found by finding "^" in the term,, then finding what comes after it if not there use 1, if x not there as well use 0
+    solveExpressionA
+        accessibility: public
+        parameters : start (int), end(int)
+        return : String
+        the string will be coordinate pairs containing corresponding x and y values for the expression between start and end, there will be 10 different points, with the x value increasing/decreasing from start to end
+    solveExpressionB
+        accessibility: public
+        parameters : x (int)
+        return: String
+        the string will be the corresponding y value if the x value in the expression was the inputted value
+Runner class methods/logic
+    request a string that is a polynomial expression, rejected if it doesn't contain at least 1 "x"
+    create a polynomial object with the string
+    request start and end values for solveExpressionA method
+    use a while loop to request values for solveExpressionB method until user quits, will not accept non integer values
