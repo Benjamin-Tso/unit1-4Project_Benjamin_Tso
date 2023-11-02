@@ -8,7 +8,7 @@ public class Polynomial {
     private ArrayList<Integer> exponents;
     public Polynomial(String e)
     {
-        expression = e.replaceAll(" ","");
+        expression = e.replaceAll(" ","").toLowerCase();
         terms = parseTerms();
         System.out.println(terms);
         signs = parseSigns();
@@ -72,6 +72,8 @@ public class Polynomial {
         ArrayList<Integer> s = new ArrayList<Integer>();
         if(expression.substring(0,1)=="-")
             s.add(-1);
+        else
+            s.add(1);
         for (int i = 0; i<terms.size()-1; i++)
         {
            if (terms.get(i).charAt(terms.get(i).length()-1)=='-')
@@ -88,19 +90,23 @@ public class Polynomial {
     private ArrayList<Double> parseCoefficients()
     {
         ArrayList<Double> c = new ArrayList<Double>();
-        for(int i =1; i<terms.size();i++)
+        for(int i =0; i<terms.size();i++)
         {
-            if(expression.substring(0,1)=="-")
-            {
-                i-=2;
-            }
+            if(terms.get(i).equals("-")) {}
             else if(terms.get(i).indexOf("x")==0)
             {
                 c.add(1.0);
             }
             else if(terms.get(i).indexOf("x")==-1)
             {
-                c.add(Double.parseDouble(terms.get(i)));
+                if (terms.get(i).indexOf("+")==terms.get(i).indexOf("-"))
+                {
+                    c.add(Double.parseDouble(terms.get(i)));
+                }
+                else
+                {
+                    c.add(Double.parseDouble(terms.get(i).substring(0,terms.get(i).length()-1)));
+                }
             }
             else
             {
@@ -112,14 +118,10 @@ public class Polynomial {
     private ArrayList<Integer> parseExponents()
     {
        ArrayList<Integer> e = new ArrayList<Integer>();
-       for(int i =1; i<terms.size();i++)
+       for(int i =0; i<terms.size();i++)
        {
-           if(expression.substring(0,1)!="-")
-           {
-               i-=2;
-               continue;
-           }
-           if(terms.get(i).indexOf("^")==-1)
+           if(terms.get(i).equals("-")) {}
+           else if(terms.get(i).indexOf("^")==-1)
            {
                if(terms.get(i).indexOf("x")==-1)
                {
@@ -132,28 +134,42 @@ public class Polynomial {
            }
            else
            {
-               e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^")+1)));
+               if(terms.get(i).indexOf("+")==terms.get(i).indexOf("-"))
+               {
+                   e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^") + 1)));
+               }
+               else
+               {
+                   e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^")+1, terms.get(i).indexOf((String.valueOf(closerString("+","-",terms.get(i))))))));
+               }
            }
 
 
        }
        return e;
     }
-    public String solveExpressionA(int x)
+    public String solveExpressionA(double x)
     {
-        int out = 0;
-        for(int i = 0; i<coefficients.size();i++);
+        if(terms.get(0).equals("-"))
         {
-
+            terms.remove(0);
+            signs.remove(0);
+        }
+        int out = 0;
+        for(int i = 0; i<terms.size();i++)
+        {
+            System.out.println(Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i));
+            out+=Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i);
         }
         return String.valueOf(out);
     }
     public String solveExpressionB(int start, int end)
     {
         String out = "";
-        for (int i = start; i<=end; i+=(end-start)/10)
+        for (double i = start; i<=end; i+=(end-start)/10)
         {
-
+            // infinitely looping
+            out+="("+i +", "+solveExpressionA(i)+")"+"\n";
         }
         return out;
     }
