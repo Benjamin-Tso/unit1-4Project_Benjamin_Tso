@@ -34,22 +34,10 @@ public class Polynomial {
         }
         return a;
     }
-//    private String fartherString(String a, String b, String word)
-//    {
-//        if (word.indexOf(a)==-1)
-//        {
-//            return b;
-//        }
-//        else if (word.indexOf(b)==-1)
-//        {
-//            return a;
-//        }
-//        else if (word.lastIndexOf(a)>word.lastIndexOf(b))
-//        {
-//            return a;
-//        }
-//        return b;
-//    }
+    private double round2(double x)
+    {
+        return (int)(x*100)/100.0;
+    }
     private ArrayList<String> parseTerms()
     {
         ArrayList<String> t = new ArrayList<String>();
@@ -158,7 +146,6 @@ public class Polynomial {
         int out = 0;
         for(int i = 0; i<terms.size();i++)
         {
-            System.out.println(Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i));
             out+=Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i);
         }
         return String.valueOf(out);
@@ -166,10 +153,10 @@ public class Polynomial {
     public String solveExpressionB(int start, int end)
     {
         String out = "";
-        for (double i = start; i<=end; i+=(end-start)/10)
+        double increment = (end-start)/9.0;
+        for (int i = 0; i<10; i++)
         {
-            // infinitely looping
-            out+="("+i +", "+solveExpressionA(i)+")"+"\n";
+            out+="("+ round2(start+i*increment) +", "+ round2(Double.parseDouble(solveExpressionA(start+i*increment)))+")"+"\n";
         }
         return out;
     }
