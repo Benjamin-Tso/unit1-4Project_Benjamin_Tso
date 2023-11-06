@@ -1,13 +1,31 @@
+/**
+ * The Instrucitons class determines which set of instructions the user should be given
+ */
 public class Instructions {
     private int step;
+
+    /**
+     * Constructor for the Instructions class, this creates a new instance of the Intructions class with thte following parameters
+     * @param s represents which step the user is on
+     */
     public Instructions(int s)
     {
         step = s;
     }
+
+    /**
+     * The set step method for the Instructions class, will change which step the user is on
+     * @param s, represents which step the user is on
+     */
     public void setStep(int s)
     {
         step = s;
     }
+
+    /**
+     * toString method for the Instructions class, will return a string containing the instructions for the resepctive step the user is on
+     * @return returns a string containing instructions for the user
+     */
     public String toString()
     {
         if (step == 1){
