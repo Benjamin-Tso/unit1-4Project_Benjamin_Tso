@@ -10,13 +10,9 @@ public class Polynomial {
     {
         expression = e.replaceAll(" ","").toLowerCase();
         terms = parseTerms();
-        System.out.println(terms);
         signs = parseSigns();
-        System.out.println(signs);
         coefficients = parseCoefficients();
-        System.out.println(coefficients);
         exponents = parseExponents();
-        System.out.println(exponents);
     }
     private String closerString(String a, String b, String word)
     {
@@ -54,6 +50,19 @@ public class Polynomial {
             tempExpression = tempExpression.substring(tempExpression.indexOf(closerString("+","-",tempExpression))+1);
         }
         return t;
+    }
+    public static boolean validPolynomial(String a)
+    {
+        String validCharacters = "1234567890x^+-";
+        if(a.equals(""))
+            return false;
+        for(int i =0; i<a.length();i++) {
+            if (!validCharacters.contains(a.charAt(i) + ""))
+            {
+                return false;
+            }
+        }
+        return true;
     }
     private ArrayList<Integer> parseSigns()
     {
