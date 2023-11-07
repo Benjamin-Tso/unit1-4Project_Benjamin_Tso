@@ -1,7 +1,8 @@
 Objects/Classes
     Polynomial class, does all the logic
     Runner class, handles user input
-Constructor
+    Instructions class, handles instructions to be given to the user
+Constructors
     Polynomial constructor
         Parameters : e (String)
         instance variables
@@ -9,12 +10,31 @@ Constructor
             terms (String list)(private) : contains a list of the terms within the expression
             coefficients (double list)(private) : contains coefficients for each term
             exponents (int list)(private) : contains exponents for each term
+    Instructions constructor
+        parameters : s (String)
+            instance variables
+            step (String)(private) : contains which step of instructions the user is on
 Polynomial class methods
+    closerString
+        accessibility : private
+        parameters : a(String), b(String), c(String)
+        return : String
+        whichever string between a and b appears first in c will be returned
+    round2
+        accessibility : private
+        parameters : x(double)
+        return : double
+        rounds x to 2 decimal places and returns it
     parseTerms
         accessibility: private
-        Parameters : none
+        parameters : none
         return : String list
         each element of the returned list is a string containing one term of the expression, found by finding the nearest + or -
+    validPolynomial
+        accessibility: public
+        parameters : expression(String)
+        return : boolean
+        returns whether a given expression follows the given rules
     parseCoefficients
         accessibility: private
         parameters : none
@@ -23,20 +43,31 @@ Polynomial class methods
     parseExponents
         accessibility: private
         parameters : none
-        return :int list
+        return : int list
         each element of the returned list is a int representing each exponent of the terms, found by finding "^" in the term,, then finding what comes after it if not there use 1, if x not there as well use 0
     solveExpressionA
-        accessibility: public
-        parameters : start (int), end(int)
-        return : String
-        the string will be coordinate pairs containing corresponding x and y values for the expression between start and end, there will be 10 different points, with the x value increasing/decreasing from start to end
-    solveExpressionB
-        accessibility: public
+        accessibility : public
         parameters : x (int)
         return: String
         the string will be the corresponding y value if the x value in the expression was the inputted value
-Runner class methods/logic
+    solveExpressionB
+        accessibility : public
+        parameters : start (int), end(int)
+        return : String
+        the string will be coordinate pairs containing corresponding x and y values for the expression between start and end, there will be 10 different points, with the x value increasing/decreasing from start to end
+Runner class logic
     request a string that is a polynomial expression, rejected if it doesn't contain at least 1 "x"
     create a polynomial object with the string
-    request start and end values for solveExpressionA method
-    use a while loop to request values for solveExpressionB method until user quits, will not accept non integer values
+    request start and end values for solveExpressionB method
+    use a while loop to request values for solveExpressionA method until user quits, will not accept non integer values
+Instructions class methods
+    setStep
+        accessibility : public
+        parameters : s(int)
+        return : void
+        sets the step which the user is on
+    toString
+        accessibility : public
+        parameters : none
+        return : String
+        prints instructions corresponding to which step the user is on
