@@ -7,12 +7,13 @@ Constructors
         Parameters : e (String)
         instance variables
             expression (String)(private) : contains the polynomial expression contained in parameter e
-            terms (String list)(private) : contains a list of the terms within the expression
-            coefficients (double list)(private) : contains coefficients for each term
-            exponents (int list)(private) : contains exponents for each term
+            terms (String list)(private) : contains a list of the terms within the expression, found using a method
+            signs (int list)(private) : contains a list of 1s and -1s representing the operation to be done with each term (+/-)
+            coefficients (double list)(private) : contains coefficients for each term, found using a method
+            exponents (int list)(private) : contains exponents for each term, found using a method
     Instructions constructor
         parameters : s (String)
-            instance variables
+        instance variables
             step (String)(private) : contains which step of instructions the user is on
 Polynomial class methods
     closerString
