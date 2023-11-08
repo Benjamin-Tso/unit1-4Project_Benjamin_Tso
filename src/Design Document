@@ -56,10 +56,10 @@ Polynomial class methods
         return : String
         the string will be coordinate pairs containing corresponding x and y values for the expression between start and end, there will be 10 different points, with the x value increasing/decreasing from start to end
 Runner class logic
-    request a string that is a polynomial expression, rejected if it doesn't contain at least 1 "x"
+    request a string that is a polynomial expression
     create a polynomial object with the string
-    request start and end values for solveExpressionB method
-    use a while loop to request values for solveExpressionA method until user quits, will not accept non integer values
+    request start and end values for solveExpressionB method, will only accept integer values
+    use a while loop to request values for solveExpressionA method until user quits
 Instructions class methods
     setStep
         accessibility : public

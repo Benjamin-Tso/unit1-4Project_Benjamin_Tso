@@ -190,8 +190,6 @@ public class Polynomial {
                    e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^")+1, terms.get(i).indexOf((String.valueOf(closerString("+","-",terms.get(i))))))));
                }
            }
-
-
        }
        return e;
     }

@@ -14,9 +14,31 @@ public class PolynomialRunner {
         Polynomial p = new Polynomial(expression);
         i.setStep(3);
         System.out.print(i);
-        int start = Integer.parseInt(s.nextLine());
+        boolean validStart = false;
+        int start = 0;
+        while(!validStart) {
+            try {
+                start = Integer.parseInt(s.nextLine());
+                validStart = true;
+            }
+            catch(NumberFormatException e)
+            {
+                System.out.print("invalid\nStart: ");
+            }
+        }
         System.out.print("End: ");
-        int end = Integer.parseInt(s.nextLine());
+        boolean validEnd = false;
+        int end = 0;
+        while(!validEnd) {
+            try {
+                end = Integer.parseInt(s.nextLine());
+                validEnd = true;
+            }
+            catch(NumberFormatException e)
+            {
+                System.out.print("invalid\nEnd: ");
+            }
+        }
         System.out.println(p.solveExpressionB(start,end));
         boolean active = true;
         i.setStep(4);
@@ -26,12 +48,13 @@ public class PolynomialRunner {
             while(true)
             {
                 System.out.print("X: ");
-                System.out.println("y: "+ p.solveExpressionA(Integer.parseInt(s.nextLine())));
+                System.out.println("y: "+ p.solveExpressionA(Double.parseDouble(s.nextLine())));
             }
         }
         catch(NumberFormatException e)
         {
             System.out.println("goodbye");
+            s.close();
         }
     }
 }
