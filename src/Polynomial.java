@@ -206,7 +206,7 @@ public class Polynomial {
             terms.remove(0);
             signs.remove(0);
         }
-        int out = 0;
+        double out = 0;
         for(int i = 0; i<terms.size();i++)
         {
             out+=Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i);
