@@ -40,7 +40,6 @@ public class PolynomialRunner {
             }
         }
         System.out.println(p.solveExpressionB(start,end));
-        boolean active = true;
         i.setStep(4);
         System.out.println(i);
         try
