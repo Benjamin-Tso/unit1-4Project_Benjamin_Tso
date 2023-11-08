@@ -8,8 +8,8 @@ public class Polynomial {
     private ArrayList<Integer> exponents;
 
     /**
-     * Constructor for the polynomial class, creates ArrayLists representing the terms, signs for each term, coefficient of each term, and exponent in each term of the
-     * inputted expression
+     * Constructor for the polynomial class, creates ArrayLists representing the terms,
+     * signs for each term, coefficient of each term, and exponent in each term of the inputted expression
      * @param e represents an expression given by the user
      */
     public Polynomial(String e)
@@ -22,7 +22,7 @@ public class Polynomial {
     }
 
     /**
-     * The closerString method of the Polynomial class, accepts three strings, and finds the first of the first two strings in the third string
+     * The closerString method of the Polynomial class, accepts three strings, and finds the which of the first two strings occurs earlier in the third string
      * @param a represents a string that the method is comparing the index of to b
      * @param b represents a string that the method is comparing the index of to a
      * @param text represents a string that the method is looking through for strings a and b
@@ -30,11 +30,11 @@ public class Polynomial {
      */
     private String closerString(String a, String b, String text)
     {
-        if (text.indexOf(a)==-1)
+        if (!text.contains(a))
         {
             return b;
         }
-        else if (text.indexOf(b)==-1)
+        else if (!text.contains(b))
         {
             return a;
         }
@@ -57,8 +57,8 @@ public class Polynomial {
     }
 
     /**
-     * The parseTerms method of the Polynomial class, returns a list of strings ending at the next operation symbol (+/-),
-     * the operation for the next term will be contained in the previous term
+     * The parseTerms method of the Polynomial class, returns a list of strings ending at the next operation symbol (+/-), each string represents
+     * a term in the expression, the operation for the next term will be contained in the previous term
      * @return a list of terms for future methods to further parse information from
      */
     private ArrayList<String> parseTerms()
@@ -67,7 +67,7 @@ public class Polynomial {
         String tempExpression = expression;
         while(tempExpression.length()!=0)
         {
-            if(tempExpression.indexOf("+")==-1 && tempExpression.indexOf("-")==-1)
+            if(!tempExpression.contains("+") && !tempExpression.contains("-"))
             {
                 t.add(tempExpression);
                 tempExpression = "";
@@ -81,17 +81,30 @@ public class Polynomial {
 
     /**
      * the validPolynomial method of the Polynomial class, returns a boolean representing whether the given expression is valid
-     * by making sure it only contains numbers, x, and + or -
-     * @param expression represents a expression to check for validity
+     * by making sure it only contains numbers, x, and + or -, also checks if all exponents are positive
+     * @param expression represents an expression to check for validity
      * @return a boolean representing if the expression follows the rules
      */
     public static boolean validPolynomial(String expression)
     {
-        String validCharacters = "1234567890x^+-.";
-        if(expression.equals(""))
+        if(expression.equals("")) {
             return false;
+        }
+        String validCharacters = "1234567890x^+-.";
+        boolean validExponent = true;
+        for(int i = 0; i<expression.length();i++)
+        {
+            if((expression.charAt(i)=='^'))
+            {
+                if(!validCharacters.substring(0,10).contains(String.valueOf(expression.charAt(i + 1))))
+                {
+                    return false;
+                }
+            }
+        }
+
         for(int i =0; i<expression.length();i++) {
-            if (!validCharacters.contains(expression.charAt(i) + ""))
+            if (!validCharacters.contains(String.valueOf(expression.charAt(i))))
             {
                 return false;
             }
@@ -100,13 +113,15 @@ public class Polynomial {
     }
 
     /**
-     * the parseSigns method of the Polynomial class, returns a list of -1s and/or 1s representing if each term is to be added or subtracted from the previous term
+     * the parseSigns method of the Polynomial class, returns a list of -1s and/or 1s representing if
+     * each term is to be added or subtracted from the previous term, when calculating, the order of elements in
+     * signs matches their corresponding term
      * @return a list of 1s and -1s representing the operation to be done between terms
      */
     private ArrayList<Integer> parseSigns()
     {
         ArrayList<Integer> s = new ArrayList<Integer>();
-        if(expression.substring(0,1)=="-")
+        if(expression.charAt(0) == '-')
             s.add(-1);
         else
             s.add(1);
@@ -125,72 +140,56 @@ public class Polynomial {
     }
 
     /**
-     * the parseCoefficients method of the Polynomial class, returns a list of doubles representing the coefficents for each term
-     * of the given expression
+     * the parseCoefficients method of the Polynomial class, returns a list of doubles representing the coefficients for each term
+     * of the given expression, each coefficient is found by searching for the number occurring before a "x",
+     * if none is found the coefficient will be 1
      * @return a list of doubles representing the coefficient of each term of the expression
      */
     private ArrayList<Double> parseCoefficients()
     {
         ArrayList<Double> c = new ArrayList<Double>();
-        for(int i =0; i<terms.size();i++)
-        {
-            if(terms.get(i).equals("-")) {}
-            else if(terms.get(i).indexOf("x")==0)
-            {
+        for (String term : terms) {
+            if (term.equals("-")) {
+            } else if (term.indexOf("x") == 0) {
                 c.add(1.0);
-            }
-            else if(terms.get(i).indexOf("x")==-1)
-            {
-                if (terms.get(i).indexOf("+")==terms.get(i).indexOf("-"))
-                {
-                    c.add(Double.parseDouble(terms.get(i)));
+            } else if (!term.contains("x")) {
+                if (term.indexOf("+") == term.indexOf("-")) {
+                    c.add(Double.parseDouble(term));
+                } else {
+                    c.add(Double.parseDouble(term.substring(0, term.length() - 1)));
                 }
-                else
-                {
-                    c.add(Double.parseDouble(terms.get(i).substring(0,terms.get(i).length()-1)));
-                }
-            }
-            else
-            {
-                c.add(Double.parseDouble(terms.get(i).substring(0, terms.get(i).indexOf("x"))));
+            } else {
+                c.add(Double.parseDouble(term.substring(0, term.indexOf("x"))));
             }
         }
         return c;
     }
 
     /**
-     * the parseExponents method of the Polynomial class, returns a list of integers representing each term's exponent
+     * the parseExponents method of the Polynomial class, returns a list of integers representing each term's exponent,
+     * each exponent is found by finding the number occurring after a "^", if no "^" is found, if a "x" is found the
+     * exponent will be 1, if no "^" or "x" is found the exponent will be 0
      * @return a list of integers representing each term's exponent
      */
     private ArrayList<Integer> parseExponents()
     {
        ArrayList<Integer> e = new ArrayList<Integer>();
-       for(int i =0; i<terms.size();i++)
-       {
-           if(terms.get(i).equals("-")) {}
-           else if(terms.get(i).indexOf("^")==-1)
-           {
-               if(terms.get(i).indexOf("x")==-1)
-               {
-                   e.add(0);
-               }
-               else
-               {
-                   e.add(1);
-               }
-           }
-           else
-           {
-               if(terms.get(i).indexOf("+")==terms.get(i).indexOf("-"))
-               {
-                   e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^") + 1)));
-               }
-               else
-               {
-                   e.add(Integer.parseInt(terms.get(i).substring(terms.get(i).indexOf("^")+1, terms.get(i).indexOf((String.valueOf(closerString("+","-",terms.get(i))))))));
-               }
-           }
-       }
+        for (String term : terms) {
+            if (term.equals("-")) {
+            } else if (!term.contains("^")) {
+                if (!term.contains("x")) {
+                    e.add(0);
+                } else {
+                    e.add(1);
+                }
+            } else {
+                if (term.indexOf("+") == term.indexOf("-")) {
+                    e.add(Integer.parseInt(term.substring(term.indexOf("^") + 1)));
+                } else {
+                    e.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString("+", "-", term)))))));
+                }
+            }
+        }
        return e;
     }
 
@@ -216,8 +215,8 @@ public class Polynomial {
     }
 
     /**
-     * the solveExpressionB method of the Polynomial class, returns a set of coordinate pairs that represents points along the polynomial between the start and
-     * end value given by the user
+     * the solveExpressionB method of the Polynomial class, returns a set of 10 coordinate pairs that represents points along the polynomial between the start and
+     * end value given by the user, each coordinate pair will be equally apart from each other and will be found using the solveExpressionA method
      * @param start represents the start of the section of the polynomial to find x and y values from
      * @param end represents the end of the section of the polynomial to find x and y values from
      * @return a string of coordinate pairs representing coordinates from the start to end value

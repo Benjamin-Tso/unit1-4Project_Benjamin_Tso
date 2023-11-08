@@ -29,7 +29,7 @@ public class Instructions {
     public String toString()
     {
         if (step == 1){
-            return "welcome to the polynomial \"solver\"\nplease enter a polynomial expression following the rules below:\nuse ^ to represent to the power of\nuse x as your only variable\nterms should only be seperated by + or -\ncoefficients and exponents should be integers";
+            return "welcome to the polynomial \"solver\"\nplease enter a polynomial expression following the rules below:\nuse ^ to represent to the power of\nuse x as your only variable\nterms should only be seperated by + or -\ncoefficients should be integers\nexponents, if present, should be positive integers";
         }
         else if (step == 2){
             return "invalid expression, please enter a different expression";
