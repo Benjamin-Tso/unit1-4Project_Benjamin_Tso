@@ -10,11 +10,11 @@ public class Polynomial {
     /**
      * Constructor for the polynomial class, creates ArrayLists representing the terms,
      * signs for each term, coefficient of each term, and exponent in each term of the inputted expression
-     * @param e represents an expression given by the user
+     * @param expression represents an expression given by the user
      */
-    public Polynomial(String e)
+    public Polynomial(String expression)
     {
-        expression = e.replaceAll(" ","").toLowerCase();
+        this.expression = expression.replaceAll(" ","").toLowerCase();
         terms = parseTerms();
         signs = parseSigns();
         coefficients = parseCoefficients();
@@ -23,26 +23,26 @@ public class Polynomial {
 
     /**
      * The closerString method of the Polynomial class, accepts three strings, and finds the which of the first two strings occurs earlier in the third string
-     * @param a represents a string that the method is comparing the index of to b
-     * @param b represents a string that the method is comparing the index of to a
+     * @param start represents a string that the method is comparing the index of to b
+     * @param end represents a string that the method is comparing the index of to a
      * @param text represents a string that the method is looking through for strings a and b
      * @return returns which string appears first in the word
      */
-    private String closerString(String a, String b, String text)
+    private String closerString(String start, String end, String text)
     {
-        if (!text.contains(a))
+        if (!text.contains(start))
         {
-            return b;
+            return end;
         }
-        else if (!text.contains(b))
+        else if (!text.contains(end))
         {
-            return a;
+            return start;
         }
-        else if (text.indexOf(a)>text.indexOf(b))
+        else if (text.indexOf(start)>text.indexOf(end))
         {
-            return b;
+            return end;
         }
-        return a;
+        return start;
 
     }
 
@@ -120,23 +120,23 @@ public class Polynomial {
      */
     private ArrayList<Integer> parseSigns()
     {
-        ArrayList<Integer> s = new ArrayList<Integer>();
+        ArrayList<Integer> signs = new ArrayList<Integer>();
         if(expression.charAt(0) == '-')
-            s.add(-1);
+            signs.add(-1);
         else
-            s.add(1);
+            signs.add(1);
         for (int i = 0; i<terms.size()-1; i++)
         {
            if (terms.get(i).charAt(terms.get(i).length()-1)=='-')
            {
-               s.add(-1);
+               signs.add(-1);
            }
            else
            {
-               s.add(1);
+               signs.add(1);
            }
         }
-        return s;
+        return signs;
     }
 
     /**
@@ -147,22 +147,22 @@ public class Polynomial {
      */
     private ArrayList<Double> parseCoefficients()
     {
-        ArrayList<Double> c = new ArrayList<Double>();
+        ArrayList<Double> coefficients = new ArrayList<Double>();
         for (String term : terms) {
             if (term.equals("-")) {
             } else if (term.indexOf("x") == 0) {
-                c.add(1.0);
+                coefficients.add(1.0);
             } else if (!term.contains("x")) {
                 if (term.indexOf("+") == term.indexOf("-")) {
-                    c.add(Double.parseDouble(term));
+                    coefficients.add(Double.parseDouble(term));
                 } else {
-                    c.add(Double.parseDouble(term.substring(0, term.length() - 1)));
+                    coefficients.add(Double.parseDouble(term.substring(0, term.length() - 1)));
                 }
             } else {
-                c.add(Double.parseDouble(term.substring(0, term.indexOf("x"))));
+                coefficients.add(Double.parseDouble(term.substring(0, term.indexOf("x"))));
             }
         }
-        return c;
+        return coefficients;
     }
 
     /**
@@ -173,24 +173,24 @@ public class Polynomial {
      */
     private ArrayList<Integer> parseExponents()
     {
-       ArrayList<Integer> e = new ArrayList<Integer>();
+       ArrayList<Integer> exponents = new ArrayList<Integer>();
         for (String term : terms) {
             if (term.equals("-")) {
             } else if (!term.contains("^")) {
                 if (!term.contains("x")) {
-                    e.add(0);
+                    exponents.add(0);
                 } else {
-                    e.add(1);
+                    exponents.add(1);
                 }
             } else {
                 if (term.indexOf("+") == term.indexOf("-")) {
-                    e.add(Integer.parseInt(term.substring(term.indexOf("^") + 1)));
+                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1)));
                 } else {
-                    e.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString("+", "-", term)))))));
+                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString("+", "-", term)))))));
                 }
             }
         }
-       return e;
+       return exponents;
     }
 
     /**
