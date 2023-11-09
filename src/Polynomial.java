@@ -91,22 +91,18 @@ public class Polynomial {
             return false;
         }
         String validCharacters = "1234567890x^+-.";
-        boolean validExponent = true;
-        for(int i = 0; i<expression.length();i++)
-        {
+
+        for(int i =0; i<expression.length();i++) {
+            if (!validCharacters.contains(String.valueOf(expression.charAt(i))))
+            {
+                return false;
+            }
             if((expression.charAt(i)=='^'))
             {
                 if(!validCharacters.substring(0,10).contains(String.valueOf(expression.charAt(i + 1))))
                 {
                     return false;
                 }
-            }
-        }
-
-        for(int i =0; i<expression.length();i++) {
-            if (!validCharacters.contains(String.valueOf(expression.charAt(i))))
-            {
-                return false;
             }
         }
         return true;

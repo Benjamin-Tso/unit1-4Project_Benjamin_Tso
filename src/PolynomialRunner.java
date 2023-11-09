@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.io.*;
 public class PolynomialRunner {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         Instructions i = new Instructions(1);
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_CYAN = "\\u001B[36m";
         System.out.println(i);
         String expression = s.nextLine().replaceAll(" ","").toLowerCase();
         while(!Polynomial.validPolynomial(expression))
@@ -39,7 +42,7 @@ public class PolynomialRunner {
                 System.out.print("invalid\nEnd: ");
             }
         }
-        System.out.println(p.solveExpressionB(start,end));
+        System.out.println(ANSI_CYAN + p.solveExpressionB(start,end) + ANSI_RESET);
         i.setStep(4);
         System.out.println(i);
         boolean validX = true;
