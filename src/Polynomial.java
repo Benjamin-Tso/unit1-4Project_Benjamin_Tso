@@ -47,11 +47,11 @@ public class Polynomial {
     }
 
     /**
-     * The round2 method of the Polynomial class, rounds the double x to 2 decimal places
+     * The roundTo2DecPlace method of the Polynomial class, rounds the double x to 2 decimal places
      * @param x represents a double that the method will round to 2 decimal places
      * @return returns the double x rounded to 2 decimal places
      */
-    private double round2(double x)
+    private double roundTo2DecPlace(double x)
     {
         return Math.round(x*100)/100.0;
     }
@@ -227,7 +227,7 @@ public class Polynomial {
         double increment = (end-start)/9.0;
         for (int i = 0; i<10; i++)
         {
-            out+="("+ round2(start+i*increment) +", "+ round2(Double.parseDouble(solveExpressionA(start+i*increment)))+")"+"\n";
+            out+="("+ roundTo2DecPlace(start+i*increment) +", "+ roundTo2DecPlace(Double.parseDouble(solveExpressionA(start+i*increment)))+")"+"\n";
         }
         return out;
     }

@@ -42,18 +42,19 @@ public class PolynomialRunner {
         System.out.println(p.solveExpressionB(start,end));
         i.setStep(4);
         System.out.println(i);
-        try
-        {
-            while(true)
+        boolean validX = true;
+        while(validX)
             {
                 System.out.print("X: ");
-                System.out.println("y: "+ p.solveExpressionA(Double.parseDouble(s.nextLine())));
+                try {
+                    System.out.println("y: " + p.solveExpressionA(Double.parseDouble(s.nextLine())));
+                }
+                catch(NumberFormatException e)
+                {
+                    validX=false;
+                }
             }
-        }
-        catch(NumberFormatException e)
-        {
-            System.out.println("goodbye");
-            s.close();
+        System.out.println("goodbye");
         }
     }
-}
+
