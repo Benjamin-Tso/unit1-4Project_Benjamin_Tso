@@ -1,5 +1,9 @@
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+/**
+ * The polynomial class represents a polynomial expression, a polynomial expression contains a independent variable
+ * typically represented with x, and optional coefficients and exponents on the x(s), and can have several x's that
+ * are added/subtracted from each other
+ */
 public class Polynomial {
     private String expression;
     private ArrayList<String> terms;
@@ -23,26 +27,25 @@ public class Polynomial {
 
     /**
      * The closerString method of the Polynomial class, accepts three strings, and finds the which of the first two strings occurs earlier in the third string
-     * @param start represents a string that the method is comparing the index of to b
-     * @param end represents a string that the method is comparing the index of to a
+     *
      * @param text represents a string that the method is looking through for strings a and b
      * @return returns which string appears first in the word
      */
-    private String closerString(String start, String end, String text)
+    private String closerString(String text)
     {
-        if (!text.contains(start))
+        if (!text.contains("+"))
         {
-            return end;
+            return "-";
         }
-        else if (!text.contains(end))
+        else if (!text.contains("-"))
         {
-            return start;
+            return "+";
         }
-        else if (text.indexOf(start)>text.indexOf(end))
+        else if (text.indexOf("+")>text.indexOf("-"))
         {
-            return end;
+            return "-";
         }
-        return start;
+        return "+";
 
     }
 
@@ -73,8 +76,8 @@ public class Polynomial {
                 tempExpression = "";
                 continue;
             }
-            t.add(tempExpression.substring(0,tempExpression.indexOf(closerString("+","-",tempExpression))+1));
-            tempExpression = tempExpression.substring(tempExpression.indexOf(closerString("+","-",tempExpression))+1);
+            t.add(tempExpression.substring(0,tempExpression.indexOf(closerString(tempExpression))+1));
+            tempExpression = tempExpression.substring(tempExpression.indexOf(closerString(tempExpression))+1);
         }
         return t;
     }
@@ -182,7 +185,7 @@ public class Polynomial {
                 if (term.indexOf("+") == term.indexOf("-")) {
                     exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1)));
                 } else {
-                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString("+", "-", term)))))));
+                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString(term)))))));
                 }
             }
         }

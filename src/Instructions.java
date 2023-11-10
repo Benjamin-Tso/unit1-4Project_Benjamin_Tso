@@ -1,5 +1,5 @@
 /**
- * The Instrucitons class determines which set of instructions the user should be given
+ * The Instructions class determines which set of instructions the user should be given
  */
 public class Instructions {
     private int step;
