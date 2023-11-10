@@ -2,6 +2,9 @@ Objects/Classes
     Polynomial class, does all the logic
     Runner class, handles user input
     Instructions class, handles instructions to be given to the user
+Imports needed
+    Java.util.ArrayList
+    Java.util.Scanner
 Constructors
     Polynomial constructor
         Parameters : e (String)
