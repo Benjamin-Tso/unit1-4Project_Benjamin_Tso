@@ -6,11 +6,10 @@ public class PolynomialRunner {
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_CYAN = "\u001B[36m";
         final String ANSI_RED = "\u001B[31m";
+        final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_PURPLE = "\u001B[35m";
-        final String ANSI_BLACK = "\u001B[30m";
-        final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
         final String ANSI_RED_BACKGROUND = "\u001B[41m";
-        System.out.println(i);
+        System.out.print(ANSI_BLUE + i + ANSI_RESET);
         String expression = s.nextLine().replaceAll(" ","").toLowerCase();
         while(!Polynomial.validPolynomial(expression))
         {
@@ -20,7 +19,7 @@ public class PolynomialRunner {
         }
         Polynomial p = new Polynomial(expression);
         i.setStep(3);
-        System.out.print(i);
+        System.out.print(ANSI_BLUE + i + ANSI_RESET);
         boolean validStart = false;
         int start = 0;
         while(!validStart) {
@@ -30,10 +29,10 @@ public class PolynomialRunner {
             }
             catch(NumberFormatException e)
             {
-                System.out.print("invalid\nStart: ");
+                System.out.print(ANSI_RED_BACKGROUND + "invalid" + ANSI_RESET + ANSI_BLUE + "\nStart: " + ANSI_RESET);
             }
         }
-        System.out.print("End: ");
+        System.out.print(ANSI_BLUE + "End: " + ANSI_RESET);
         boolean validEnd = false;
         int end = 0;
         while(!validEnd) {
@@ -43,12 +42,12 @@ public class PolynomialRunner {
             }
             catch(NumberFormatException e)
             {
-                System.out.print("invalid\nEnd: ");
+                System.out.print(ANSI_RED_BACKGROUND + "invalid" + ANSI_RESET + ANSI_BLUE + "\nEnd: " + ANSI_RESET);
             }
         }
-        System.out.println(ANSI_CYAN + p.solveExpressionB(start,end) + ANSI_RESET);
+        System.out.println("\n" + ANSI_CYAN + p.solveExpressionB(start,end) + ANSI_RESET);
         i.setStep(4);
-        System.out.println(i);
+        System.out.println(ANSI_BLUE + i + ANSI_RESET);
         boolean validX = true;
         while(validX)
             {
@@ -62,7 +61,7 @@ public class PolynomialRunner {
                     s.close();
                 }
             }
-        System.out.println(ANSI_GREEN_BACKGROUND + ANSI_BLACK + "goodbye" + ANSI_RESET);
+        System.out.print("\ngoodbye");
 
         }
     }
