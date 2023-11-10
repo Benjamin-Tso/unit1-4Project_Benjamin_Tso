@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 /**
- * The polynomial class represents a polynomial expression, a polynomial expression contains a independent variable
+ * The polynomial class represents a polynomial expression, a polynomial expression contains an independent variable
  * typically represented with x, and optional coefficients and exponents on the x(s), and can have several x's that
  * are added/subtracted from each other
  */
 public class Polynomial {
-    private String expression;
-    private ArrayList<String> terms;
-    private ArrayList<Integer> signs;
-    private ArrayList<Double> coefficients;
-    private ArrayList<Integer> exponents;
+    private final String expression;
+    private final ArrayList<String> terms;
+    private final ArrayList<Integer> signs;
+    private final ArrayList<Double> coefficients;
+    private final ArrayList<Integer> exponents;
 
     /**
      * Constructor for the polynomial class, creates ArrayLists representing the terms,
@@ -66,7 +66,7 @@ public class Polynomial {
      */
     private ArrayList<String> parseTerms()
     {
-        ArrayList<String> t = new ArrayList<String>();
+        ArrayList<String> t = new ArrayList<>();
         String tempExpression = expression;
         while(tempExpression.length()!=0)
         {
@@ -119,7 +119,7 @@ public class Polynomial {
      */
     private ArrayList<Integer> parseSigns()
     {
-        ArrayList<Integer> signs = new ArrayList<Integer>();
+        ArrayList<Integer> signs = new ArrayList<>();
         if(expression.charAt(0) == '-')
             signs.add(-1);
         else
@@ -146,7 +146,7 @@ public class Polynomial {
      */
     private ArrayList<Double> parseCoefficients()
     {
-        ArrayList<Double> coefficients = new ArrayList<Double>();
+        ArrayList<Double> coefficients = new ArrayList<>();
         for (String term : terms) {
             if (term.equals("-")) {
             } else if (term.indexOf("x") == 0) {
@@ -172,7 +172,7 @@ public class Polynomial {
      */
     private ArrayList<Integer> parseExponents()
     {
-       ArrayList<Integer> exponents = new ArrayList<Integer>();
+       ArrayList<Integer> exponents = new ArrayList<>();
         for (String term : terms) {
             if (term.equals("-")) {
             } else if (!term.contains("^")) {
@@ -185,7 +185,7 @@ public class Polynomial {
                 if (term.indexOf("+") == term.indexOf("-")) {
                     exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1)));
                 } else {
-                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((String.valueOf(closerString(term)))))));
+                    exponents.add(Integer.parseInt(term.substring(term.indexOf("^") + 1, term.indexOf((closerString(term))))));
                 }
             }
         }
