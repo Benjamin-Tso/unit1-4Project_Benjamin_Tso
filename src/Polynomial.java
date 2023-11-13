@@ -198,7 +198,7 @@ public class Polynomial {
      * @param x represents the x value to solve a respective y value from
      * @return a string representing the y value corresponding to the given x value in the user's polynomial
      */
-    public String solveExpressionA(double x)
+    public double solveExpressionA(double x)
     {
         if(terms.get(0).equals("-"))
         {
@@ -210,7 +210,7 @@ public class Polynomial {
         {
             out+=Math.pow(x,exponents.get(i))*signs.get(i)*coefficients.get(i);
         }
-        return String.valueOf(out);
+        return roundTo2DecPlace(out);
     }
 
     /**
@@ -226,8 +226,25 @@ public class Polynomial {
         double increment = (end-start)/9.0;
         for (int i = 0; i<10; i++)
         {
-            out+="("+ roundTo2DecPlace(start+i*increment) +", "+ roundTo2DecPlace(Double.parseDouble(solveExpressionA(start+i*increment)))+")"+"\n";
+            out+="("+ roundTo2DecPlace(start+i*increment) +", "+ solveExpressionA(start+i*increment)+")"+"\n";
         }
         return out;
     }
+    public double rateOfChange(double x1, double x2)
+    {
+        return roundTo2DecPlace((solveExpressionA(x2)-solveExpressionA(x1))/(x2-x1));
+    }
+    public static boolean validStartEnd(String in)
+    {
+        try
+        {
+            Double.parseDouble(in);
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
 }

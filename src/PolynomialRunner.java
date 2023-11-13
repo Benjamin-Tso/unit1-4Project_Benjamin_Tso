@@ -58,9 +58,29 @@ public class PolynomialRunner {
                 catch(NumberFormatException e)
                 {
                     validX=false;
-                    s.close();
                 }
             }
+        if(s.nextLine().equalsIgnoreCase("slope")|| s.nextLine().equalsIgnoreCase("roc")|| s.nextLine().equalsIgnoreCase("rate of change")){
+            String start2,end2;
+            i.setStep(5);
+            System.out.println(i);
+            while(!s.nextLine().equalsIgnoreCase("q"))
+            {
+                System.out.print(ANSI_BLUE + "start: " + ANSI_RESET);
+                start2=s.nextLine();
+                while(!Polynomial.validStartEnd(start2)){
+                    System.out.println(ANSI_RED_BACKGROUND + "invalid" + ANSI_RESET + ANSI_BLUE + "\nStart: " + ANSI_RESET);
+                    start2=s.nextLine();
+                }
+                System.out.print(ANSI_BLUE + "end: " + ANSI_RESET);
+                end2=s.nextLine();
+                while(!Polynomial.validStartEnd(start2)){
+                    System.out.println(ANSI_RED_BACKGROUND + "invalid" + ANSI_RESET + ANSI_BLUE + "\nEnd: " + ANSI_RESET);
+                    end2=s.nextLine();
+                }
+                System.out.println("the average rate of change between " + start2 + " and " + end2 + " is " + p.rateOfChange(Double.parseDouble(start2),Double.parseDouble(end2)));
+            }
+        }
         System.out.print("\ngoodbye");
 
         }
