@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * are added/subtracted from each other
  */
 public class Polynomial {
+    //instance variables, will not be changed upon initialization, so all are final
     private final String expression;
     private final ArrayList<String> terms;
     private final ArrayList<Integer> signs;
@@ -26,11 +27,11 @@ public class Polynomial {
     }
 
     /**
-     * The closerString method of the Polynomial class, accepts three strings, and finds the which of the first two strings occurs earlier in the third string
-     *
+     * The closerString method of the Polynomial class, finds whether + or - is closer in the string
      * @param text represents a string that the method is looking through for strings a and b
      * @return returns which string appears first in the word
      */
+    //needed to know when to end current term, which will be at the closest +/-
     private String closerString(String text)
     {
         if (!text.contains("+"))
@@ -117,6 +118,7 @@ public class Polynomial {
      * signs matches their corresponding term
      * @return a list of 1s and -1s representing the operation to be done between terms
      */
+    //signs represent whether a term is to be added or subtracted
     private ArrayList<Integer> parseSigns()
     {
         ArrayList<Integer> signs = new ArrayList<>();
@@ -198,6 +200,7 @@ public class Polynomial {
      * @param x represents the x value to solve a respective y value from
      * @return a string representing the y value corresponding to the given x value in the user's polynomial
      */
+    //solves for individual coordinate pairs
     public double solveExpressionA(double x)
     {
         if(terms.get(0).equals("-"))
@@ -220,6 +223,7 @@ public class Polynomial {
      * @param end represents the end of the section of the polynomial to find x and y values from
      * @return a string of coordinate pairs representing coordinates from the start to end value
      */
+    //solves for a set of 10 coordinate pairs
     public String solveExpressionB(int start, int end)
     {
         String out = "";

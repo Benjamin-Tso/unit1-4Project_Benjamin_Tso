@@ -1,16 +1,21 @@
 import java.util.Scanner;
 public class PolynomialRunner {
     public static void main(String[] args) {
+        //scanner
         Scanner s = new Scanner(System.in);
+        //instruction object
         Instructions i = new Instructions(1);
+        //text colors
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_CYAN = "\u001B[36m";
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_PURPLE = "\u001B[35m";
         final String ANSI_RED_BACKGROUND = "\u001B[41m";
+        //start
         System.out.print(ANSI_BLUE + i + ANSI_RESET);
         String expression = s.nextLine().replaceAll(" ","").toLowerCase();
+        //making sure expression is valid
         while(!Polynomial.validPolynomial(expression))
         {
             i.setStep(2);
@@ -22,6 +27,7 @@ public class PolynomialRunner {
         System.out.print(ANSI_BLUE + i + ANSI_RESET);
         boolean validStart = false;
         int start = 0;
+        //making sure start value is valid
         while(!validStart) {
             try {
                 start = Integer.parseInt(s.nextLine());
@@ -35,6 +41,7 @@ public class PolynomialRunner {
         System.out.print(ANSI_BLUE + "End: " + ANSI_RESET);
         boolean validEnd = false;
         int end = 0;
+        //making sure end value is valid
         while(!validEnd) {
             try {
                 end = Integer.parseInt(s.nextLine());
@@ -61,7 +68,7 @@ public class PolynomialRunner {
                 }
             }
         System.out.print("\ngoodbye");
-
+        //end
         }
     }
 
