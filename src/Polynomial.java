@@ -230,21 +230,6 @@ public class Polynomial {
         }
         return out;
     }
-    public double rateOfChange(double x1, double x2)
-    {
-        return roundTo2DecPlace((solveExpressionA(x2)-solveExpressionA(x1))/(x2-x1));
-    }
-    public static boolean validStartEnd(String in)
-    {
-        try
-        {
-            Double.parseDouble(in);
-        }
-        catch (NumberFormatException e)
-        {
-            return false;
-        }
-        return true;
-    }
 
 }
+

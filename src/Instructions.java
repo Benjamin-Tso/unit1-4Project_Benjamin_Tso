@@ -37,14 +37,11 @@ public class Instructions {
         else if (step == 3){
             return "\nnow you will give a 2 integer or decimal values, a start and end, and 10 coordinate pairs between them will be found\n\nStart: ";
         }
-        else if (step == 4)
-        {
-            return "now enter x values, integer or decimal, they will be plugged into your polynomial, and the y value will be found\nquit with non-numbers (letters/non-math symbol)\ntype ROC/Rate Of Change/Slope to go to rate of change calculator";
-        }
         else
         {
-            return "now you will enter 2 integer or decimal values, and the rate of change on your polynomial between those two x values will be found";
+            return "now enter x values, integer or decimal, they will be plugged into your polynomial, and the y value will be found\nquit with non-numbers (letters/non-math symbol)";
         }
+
     }
 
 }
